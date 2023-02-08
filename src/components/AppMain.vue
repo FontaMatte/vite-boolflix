@@ -1,22 +1,34 @@
 <script>
 
+import { store } from '../store';
+import AppCard from './AppCard.vue';
+
 export default {
 
   name: 'AppMain',
   data() {
     return {
-
+      store
     };
   },
   components: {
-
+    AppCard
   }
+  
 }
 </script>
 
 <template>
   <main>
-    MAIN
+
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="col border" v-for="movie in store.moviesList">
+          <AppCard :movieCard="movie"/>
+        </div>
+      </div>
+    </div>
+   
   </main>
 </template>
 

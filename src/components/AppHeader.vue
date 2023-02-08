@@ -22,7 +22,7 @@ export default {
         <div class="col-6 m-3">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Inserisci il film che stai cercando">
-            <span class="input-group-text">CERCA</span>
+            <button class="input-group-text">CERCA</button>
           </div>
         </div>
       </div>

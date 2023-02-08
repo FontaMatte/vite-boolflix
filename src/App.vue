@@ -9,13 +9,34 @@ export default {
   name: 'App',
   data() {
     return {
-      store
+      store,
+      apiKey:'?api_key=aa915bc853b15971921a86116718a880',
+      defaultQuery: '&query="ritorno al"',
     };
   },
   components: {
     AppHeader,
     AppMain,
     AppFooter
+  },
+  created() {
+
+    axios
+      .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + this.defaultQuery)
+      .then((response) => {
+        console.log(response.data.results);
+        this.store.moviesList = response.data.results
+      });
+
+    axios
+      .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + this.defaultQuery)
+      .then((response) => {
+        console.log(response.data.results);
+        this.store.tvSeriesList = response.data.results
+      });
+  },
+  methods: {
+
   }
 }
 </script>
