@@ -42,22 +42,30 @@ export default {
     // FUNZIONE PER OTTENERE MOVIES FILTRATI
     getMoviesList() {
 
+      if ( this.store.inputValue != '') {
       axios
       .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + `&query="${this.store.inputValue}"`)
       .then((response) => {
         console.log(response.data.results);
         this.store.moviesList = response.data.results
       });
+      }
+
+      this.store.inputValue = '';
 
     },
     getTvSeriesList() {
 
+      if ( this.store.inputValue != '') {
       axios
       .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + `&query="${this.store.inputValue}"`)
       .then((response) => {
         console.log(response.data.results);
         this.store.tvSeriesList = response.data.results
       });
+      }
+
+      this.store.inputValue = '';
 
       },
 
@@ -67,7 +75,7 @@ export default {
 
 <template>
 
-  <AppHeader @search="getMoviesList"/>
+  <AppHeader @search="getMoviesList(),getTvSeriesList()"/>
 
   <AppMain/>
   
