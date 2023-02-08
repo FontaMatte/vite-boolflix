@@ -21,6 +21,7 @@ export default {
   },
   created() {
 
+    // INVIO RICHIESTA MOVIES
     axios
       .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + this.defaultQuery)
       .then((response) => {
@@ -28,14 +29,37 @@ export default {
         this.store.moviesList = response.data.results
       });
 
+    // INVIO RICHIESTA TV SERIES
     axios
       .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + this.defaultQuery)
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         this.store.tvSeriesList = response.data.results
       });
   },
   methods: {
+
+    // FUNZIONE PER OTTENERE MOVIES FILTRATI
+    getMoviesList() {
+
+      axios
+      .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + `&query="${this.store.inputValue}"`)
+      .then((response) => {
+        console.log(response.data.results);
+        this.store.moviesList = response.data.results
+      });
+
+    },
+    getTvSeriesList() {
+
+      axios
+      .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + `&query="${this.store.inputValue}"`)
+      .then((response) => {
+        console.log(response.data.results);
+        this.store.tvSeriesList = response.data.results
+      });
+
+      },
 
   }
 }
@@ -43,7 +67,7 @@ export default {
 
 <template>
 
-  <AppHeader/>
+  <AppHeader @search="getMoviesList"/>
 
   <AppMain/>
   
