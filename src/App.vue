@@ -11,7 +11,7 @@ export default {
     return {
       store,
       apiKey:'?api_key=aa915bc853b15971921a86116718a880',
-      defaultQuery: '&query="ritorno"',
+      defaultQuery: '&query="star"',
     };
   },
   components: {
@@ -22,52 +22,74 @@ export default {
   created() {
 
     // INVIO RICHIESTA MOVIES
-    axios
-      .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + this.defaultQuery)
-      .then((response) => {
-        console.log(response.data.results);
-        this.store.moviesList = response.data.results
-      });
+    this.getMoviesList();
 
     // INVIO RICHIESTA TV SERIES
+    this.getTvSeriesList();
+  },
+  methods: {
+
+    // FUNZIONE RICHIESTA API MOVIES
+    getMoviesList() {
+      axios
+      .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + this.defaultQuery)
+      .then((response) => {
+        console.log('movies list', response.data.results);
+        this.store.moviesList = response.data.results
+      });
+    },
+    // FUNZIONE RICHIESTA API TV SERIES
+    getTvSeriesList() {
     axios
       .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + this.defaultQuery)
       .then((response) => {
         // console.log(response.data.results);
         this.store.tvSeriesList = response.data.results
-      });
-  },
-  methods: {
+      })
+    },
 
     // FUNZIONE PER OTTENERE MOVIES FILTRATI
-    getMoviesList() {
+    getMoviesListFiltered() {
 
       if ( this.store.inputValue != '') {
-      axios
-      .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + `&query="${this.store.inputValue}"`)
-      .then((response) => {
-        console.log(response.data.results);
-        this.store.moviesList = response.data.results
-      });
+        axios
+        .get('https://api.themoviedb.org/3/search/movie'+ this.apiKey + `&query="${this.store.inputValue}"`)
+        .then((response) => {
+
+          console.log('movies list filtrata',response.data.results);
+          
+          if (response.data.results != []) {
+            this.store.moviesList = response.data.results; 
+          }
+          else {
+            this.getMoviesList();
+          }
+        })   
       }
 
       this.store.inputValue = '';
 
     },
-    getTvSeriesList() {
+    // FUNZIONE PER OTTENERE TV SERIES FILTRATE
+    getTvSeriesListFiltered() {
 
       if ( this.store.inputValue != '') {
       axios
       .get('https://api.themoviedb.org/3/search/tv'+ this.apiKey + `&query="${this.store.inputValue}"`)
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         this.store.tvSeriesList = response.data.results
-      });
+      })
+      // .catch((error) => {
+
+      //   this.getTvSeriesList();
+
+      // })
       }
 
       this.store.inputValue = '';
 
-      },
+    },
 
   }
 }
@@ -75,7 +97,7 @@ export default {
 
 <template>
 
-  <AppHeader @search="getMoviesList(),getTvSeriesList()"/>
+  <AppHeader @search="getMoviesListFiltered(),getTvSeriesListFiltered()"/>
 
   <AppMain/>
   

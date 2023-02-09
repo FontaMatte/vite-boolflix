@@ -19,18 +19,15 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="bg-secondary">
 
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-        
-        <!-- CICLO L'ARRAY DEI RISULATI CHE MI VENGONO RESTITUITI -->
-        <div class="col border" v-for="movie in store.moviesList">
+    <div class="container pt-5">
+           
+        <div class="d-flex align-items-center flex-wrap" >
 
-          <AppCard :movieCard="movie"/>
+          <AppCard v-for="movie in store.moviesList" :movieCard="movie"/>
 
         </div>
-      </div>
     </div>
    
   </main>

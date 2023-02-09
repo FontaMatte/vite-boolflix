@@ -16,63 +16,87 @@ export default {
       rating() {
         return Math.ceil(this.movieCard.vote_average / 2);
       },
-      ratingStars() {
-        ratingStars = ''
-        for (let i = 0; i < this.rating; i++) {
-          ratingStars = `<i class="fa-solid fa-star"></i>`;
-        }
-      }
   }
   
 }
 </script>
 
 <template>
-<div>
-  <div class="poster">
-    <img class="img-fluid" :src="`https://image.tmdb.org/t/p/w300${movieCard.backdrop_path}`" 
-      alt="Missing Image">
-  </div>
-  <ol>
-    <li>{{ movieCard.title }}</li>
+<section class="p-4">
+    <div class="position-relative">
 
-    <li>{{ movieCard.original_title }}</li>
+      <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.backdrop_path}`" :alt="movieCard.title">
 
-    <li v-if="movieCard.original_language == 'it'">
-      <img src="../assets/img/it.png" :alt="movieCard.original_language">
-    </li>
-    <li v-else-if="movieCard.original_language == 'en'">
-      <img src="../assets/img/en.png" :alt="movieCard.original_language">
-    </li>
-    <li v-else-if="movieCard.original_language == 'es'">
-      <img src="../assets/img/es.png" :alt="movieCard.original_language">
-    </li>
-    <li v-else-if="movieCard.original_language == 'fr'">
-      <img src="../assets/img/fr.png" :alt="movieCard.original_language">
-    </li>
-    <li v-else>
-      <img src="../assets/img/Unknown.png" :alt="movieCard.original_language">
-    </li>
+      <div class="position-absolute top-0 start-0 bottom-0 end-0 py-4 px-3 on-hover">
+        <h4>{{ movieCard.title }}</h4>
 
-    <li>
-      <span v-for="star in rating">
-        <i class="fa-solid fa-star text-warning"></i>
-      </span>
-      <span v-for="star in 5 - rating">
-        <i class="fa-solid fa-star text-secondary"></i>
-      </span>
-    </li>
-    
-  </ol>
-</div>
+        <h5>{{ movieCard.original_title }}</h5>
+
+        <span v-if="movieCard.original_language == 'it'">
+          <img src="../assets/img/it.png" :alt="movieCard.original_language">
+        </span>
+        <span v-else-if="movieCard.original_language == 'en'">
+          <img src="../assets/img/en.png" :alt="movieCard.original_language">
+        </span>
+        <span v-else-if="movieCard.original_language == 'es'">
+          <img src="../assets/img/es.png" :alt="movieCard.original_language">
+        </span>
+        <span v-else-if="movieCard.original_language == 'fr'">
+          <img src="../assets/img/fr.png" :alt="movieCard.original_language">
+        </span>
+        <span v-else>
+          <img src="../assets/img/Unknown.png" :alt="movieCard.original_language">
+        </span>
+
+        <div>
+          <span>
+            <i v-for="star in rating" class="fa-solid fa-star text-warning"></i>
+          </span>
+          <span>
+            <i v-for="star in 5 - rating" class="fa-solid fa-star text-secondary"></i>
+          </span>
+        </div>
+      </div>
+
+    </div>
+</section>
 </template>
 
 <style lang="scss" scoped>
+section {
+  width: 25%;
+  height: auto;
 
-li {
+  .position-relative {
+        height: 450px;
 
-  img {
-    width: 30px;
+        overflow: hidden;
+
+        border: 1.5px solid white;
+
+        border-radius: 10px;
+  }
+  .poster {
+    height: 450px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .on-hover {
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+
+    img {
+      width: 30px;
+    }
+
+  }
+
+  &:hover .on-hover {
+    display: block;
   }
 }
 
