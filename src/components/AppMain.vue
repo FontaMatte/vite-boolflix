@@ -26,6 +26,7 @@ export default {
         <div class="d-flex align-items-center flex-wrap" >
 
           <AppCard v-for="movie in store.moviesList" :movieCard="movie"/>
+          <AppCard v-for="serie in store.tvSeriesList" :movieCard="serie"/>
 
         </div>
     </div>

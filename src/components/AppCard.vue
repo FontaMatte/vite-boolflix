@@ -28,30 +28,35 @@ export default {
       <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.poster_path}`" :alt="movieCard.title">
 
       <div class="position-absolute top-0 start-0 bottom-0 end-0 py-4 px-3 on-hover">
-        <h4 v-if="movieCard.title">Title: {{ movieCard.title }}</h4>
+        <h4 v-if="movieCard.title">{{ movieCard.title }}</h4>
         <h4 v-if="movieCard.name">Title: {{ movieCard.name }}</h4>
 
-        <h5 v-if="movieCard.original_title">Original Title: {{ movieCard.original_title }}</h5>
+        <h5 v-if="movieCard.original_title">{{ movieCard.original_title }}</h5>
         <h5 v-if="movieCard.original_name">Original Title: {{ movieCard.original_name }}</h5>
 
-        <span v-if="movieCard.original_language == 'it'">
-          <img src="../assets/img/it.png" :alt="movieCard.original_language">
-        </span>
-        <span v-else-if="movieCard.original_language == 'en'">
-          <img src="../assets/img/en.png" :alt="movieCard.original_language">
-        </span>
-        <span v-else-if="movieCard.original_language == 'es'">
-          <img src="../assets/img/es.png" :alt="movieCard.original_language">
-        </span>
-        <span v-else-if="movieCard.original_language == 'fr'">
-          <img src="../assets/img/fr.png" :alt="movieCard.original_language">
-        </span>
-        <span v-else>
-          <img src="../assets/img/Unknown.png" :alt="movieCard.original_language">
-        </span>
+        <!-- LANGUAGE FLAG -->
+        <div class="mt-3">
+          <span v-if="movieCard.original_language == 'it'">
+            <img src="../assets/img/it.png" :alt="movieCard.original_language">
+          </span>
+          <span v-else-if="movieCard.original_language == 'en'">
+            <img src="../assets/img/en.png" :alt="movieCard.original_language">
+          </span>
+          <span v-else-if="movieCard.original_language == 'es'">
+            <img src="../assets/img/es.png" :alt="movieCard.original_language">
+          </span>
+          <span v-else-if="movieCard.original_language == 'fr'">
+            <img src="../assets/img/fr.png" :alt="movieCard.original_language">
+          </span>
+          <span v-else>
+            <img src="../assets/img/Unknown.png" :alt="movieCard.original_language">
+          </span>
+        </div>
 
-        <div>
+        <!-- RATING -->
+        <div class="mt-3">
           <span>
+            Voto:
             <i v-for="star in rating" class="fa-solid fa-star text-warning"></i>
           </span>
           <span>
