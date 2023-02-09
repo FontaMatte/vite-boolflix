@@ -11,7 +11,7 @@ export default {
     return {
       store,
       apiKey:'?api_key=aa915bc853b15971921a86116718a880',
-      defaultQuery: '&query="ritorno al"',
+      defaultQuery: '&query="ritorno"',
     };
   },
   components: {

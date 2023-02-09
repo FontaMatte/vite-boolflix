@@ -9,20 +9,22 @@ export default {
     return {
       store
     };
-  },
-  components: {
-
   }
 }
 </script>
 
 <template>
-  <header>
+  <header class="bg-dark">
 
     <div class="container">
-      <div class="row">
-        <div class="col-6 m-3">
-          <div class="input-group mb-3">
+      <div class="row align-items-center justify-content-between p-3">
+        <div class="title col-6">
+          <h1 class="text-danger">
+            BOOLFLIX
+          </h1>
+        </div>
+        <div class="col-5 m-3">
+          <div class="input-group">
 
             <input type="text" class="form-control" 
               placeholder="Inserisci il film che stai cercando"
