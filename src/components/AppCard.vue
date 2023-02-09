@@ -23,14 +23,14 @@ export default {
 
 <template>
 <section class="p-4">
-    <div class="position-relative">
+    <div class="position-relative card-container">
 
       <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.backdrop_path}`" :alt="movieCard.title">
 
       <div class="position-absolute top-0 start-0 bottom-0 end-0 py-4 px-3 on-hover">
-        <h4>{{ movieCard.title }}</h4>
+        <h4>Title: {{ movieCard.title }}</h4>
 
-        <h5>{{ movieCard.original_title }}</h5>
+        <h5>Original Title: {{ movieCard.original_title }}</h5>
 
         <span v-if="movieCard.original_language == 'it'">
           <img src="../assets/img/it.png" :alt="movieCard.original_language">
@@ -64,17 +64,14 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  width: 25%;
+  width: calc(100% / 3);
   height: auto;
 
-  .position-relative {
+  .card-container {
         height: 450px;
-
         overflow: hidden;
-
         border: 1.5px solid white;
-
-        border-radius: 10px;
+        border-radius: 5px;
   }
   .poster {
     height: 450px;
@@ -94,7 +91,6 @@ section {
     }
 
   }
-
   &:hover .on-hover {
     display: block;
   }
