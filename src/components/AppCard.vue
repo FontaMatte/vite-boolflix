@@ -25,12 +25,14 @@ export default {
 <section class="p-4">
     <div class="position-relative card-container">
 
-      <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.backdrop_path}`" :alt="movieCard.title">
+      <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.poster_path}`" :alt="movieCard.title">
 
       <div class="position-absolute top-0 start-0 bottom-0 end-0 py-4 px-3 on-hover">
-        <h4>Title: {{ movieCard.title }}</h4>
+        <h4 v-if="movieCard.title">Title: {{ movieCard.title }}</h4>
+        <h4 v-if="movieCard.name">Title: {{ movieCard.name }}</h4>
 
-        <h5>Original Title: {{ movieCard.original_title }}</h5>
+        <h5 v-if="movieCard.original_title">Original Title: {{ movieCard.original_title }}</h5>
+        <h5 v-if="movieCard.original_name">Original Title: {{ movieCard.original_name }}</h5>
 
         <span v-if="movieCard.original_language == 'it'">
           <img src="../assets/img/it.png" :alt="movieCard.original_language">
