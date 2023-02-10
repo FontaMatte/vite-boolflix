@@ -10,8 +10,7 @@ export default {
   data() {
     return {
       store,
-      apiKey:'aa915bc853b15971921a86116718a880',
-      defaultQuery: '&query="star"',
+      apiKey:'aa915bc853b15971921a86116718a880'
     };
   },
   components: {
@@ -21,22 +20,27 @@ export default {
   },
   created() {
 
-        axios
+    this.getMainPage();    
+
+  },
+  methods: {
+    // FUNZIONE PER TORNARE ALLA PAGINA PRINCIPALE
+    getMainPage() {
+      axios
           .get('https://api.themoviedb.org/3/movie/popular?api_key=aa915bc853b15971921a86116718a880&language=it-IT&page=1')
           .then((response) => {
 
             this.store.moviesList = response.data.results;
+            this.store.tvSeriesList = '';
 
           });
-
-  },
-  methods: {
+    },
 
     getSearch() {
 
       this.makeSearch('movie');
       this.makeSearch('tv');
-
+      
     },
     makeSearch(endpoint) {
       let url = 'https://api.themoviedb.org/3/search/';
@@ -52,15 +56,19 @@ export default {
           .then((response) => {
 
             if (endpoint == 'movie') {
-            this.store.moviesList = response.data.results;
+             
+              this.store.moviesList = response.data.results;
+              console.log('movies',response.data.results);
+              this.store.inputValue = '';
             }
             else {
+              
               this.store.tvSeriesList = response.data.results;
+              console.log('serie tv',response.data.results);
+              this.store.inputValue = '';
             }
           });
       }
-
-        this.store.inputValue = '';
     }
   }
 }
@@ -68,7 +76,7 @@ export default {
 
 <template>
 
-  <AppHeader @search="getSearch"/>
+  <AppHeader @search="getSearch" @mainPage="getMainPage"/>
 
   <AppMain/>
   

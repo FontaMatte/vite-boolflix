@@ -19,7 +19,7 @@ export default {
     <div class="container">
       <div class="row align-items-center justify-content-between p-3">
         <div class="title col-6">
-          <h1 class="text-danger">
+          <h1 role="button" @click="$emit('mainPage')" class="text-danger d-inline">
             BOOLFLIX
           </h1>
         </div>
