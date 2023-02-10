@@ -34,12 +34,18 @@ export default {
             this.store.tvSeriesList = '';
 
           });
+      
     },
 
     getSearch() {
 
       this.makeSearch('movie');
       this.makeSearch('tv');
+      
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
       
     },
     makeSearch(endpoint) {

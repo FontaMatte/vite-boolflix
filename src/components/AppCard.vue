@@ -32,11 +32,12 @@ export default {
         <img class="poster" :src="`https://image.tmdb.org/t/p/w342${movieCard.poster_path}`" :alt="movieCard.title">
 
         <div class="position-absolute top-0 start-0 bottom-0 end-0 py-4 px-3 on-hover">
+          
           <h4 v-if="movieCard.title">{{ movieCard.title }}</h4>
-          <h4 v-if="movieCard.name">{{ movieCard.name }}</h4>
+          <h4 v-else="movieCard.name">{{ movieCard.name }}</h4>
 
           <h5 v-if="movieCard.original_title">{{ movieCard.original_title }}</h5>
-          <h5 v-if="movieCard.original_name">{{ movieCard.original_name }}</h5>
+          <h5 v-else="movieCard.original_name">{{ movieCard.original_name }}</h5>
 
           <!-- LANGUAGE FLAG -->
           <div class="mt-3">
